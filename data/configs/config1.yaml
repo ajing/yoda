@@ -1,9 +1,13 @@
 data: 
   input_path: "../data/iris_data.csv"
+  eval_path: "../data/iris_data.csv"
   output_path: "../output/"
   features: "sepal_length,sepal_width,petal_length"
   label: species
 train:
-  class: xgboost.XGBRegressor
-  max_depth: 4
-  num_estimator: 50
+  estimator: xgboost.XGBRegressor
+  params:
+    max_depth: 4
+    num_estimator: 50
+eval:
+  metrics: "accuracy,jaccard_score"
