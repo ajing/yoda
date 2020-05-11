@@ -1,7 +1,7 @@
 data: 
-  input_path: "../data/iris_data.csv"
-  eval_path: "../data/iris_data.csv"
-  output_path: "../output/"
+  input_path: !format "gs://{PROJECT_ID}/{USER}/test/iris_data.csv"
+  eval_path: !format "gs://{PROJECT_ID}/{USER}/test/iris_data.csv"
+  output_path: !format "gs://{PROJECT_ID}/{USER}/test/output/"
   features: "sepal_length,sepal_width,petal_length"
   label: species
 train:
