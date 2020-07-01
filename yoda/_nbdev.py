@@ -7,12 +7,13 @@ index = {"Data": "00_core.ipynb",
          "run_eval": "00_core.ipynb",
          "run_on_dict": "00_core.ipynb",
          "FormatTag": "00_core.ipynb",
-         "AIP": "01_run.ipynb",
+         "AIP": "01_runner.ipynb",
+         "run_yoda_on_gcp": "01_runner.ipynb",
          "cli": "02_cli.ipynb",
          "run": "02_cli.ipynb"}
 
 modules = ["core.py",
-           "executor.py",
+           "runner.py",
            "cli.py"]
 
 doc_url = "https://ajing.github.io/yoda/"

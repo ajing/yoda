@@ -7,15 +7,19 @@ import click
 import yaml
 
 from .core import run_on_dict
+from .runner import AIP
 
 # Cell
 @click.group()
 def cli():
     pass
 
-
 @cli.command()
 @click.argument('config', type=click.File('r'))
 def run(config):
     conf_dict = yaml.load(config, Loader=yaml.FullLoader)
-    run_on_dict(conf_dict)
+    if _run_on_local(conf_dict):
+        run_on_dict_local(conf_dict)
+    else:
+        AIP.run()
+        run_on_dict_gcp(conf_dict)

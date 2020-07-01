@@ -12,6 +12,7 @@ FROM ubuntu:18.04
 WORKDIR /root
 
 ADD startup.sh /root
+ADD gcp-wmt-custom-setup.sh /root
 
 RUN apt-get update --fix-missing \
     && apt-get install -y systemd apt-utils wget procps git curl vim tmux unzip zip grep sed dpkg \
@@ -44,7 +45,7 @@ ENV PATH $PATH:/root/tools/google-cloud-sdk/bin
 # Make sure gsutil will use the default service account
 RUN echo '[GoogleCompute]\nservice_account = default' > /etc/boto.cfg
 
-ENTRYPOINT "bash -x /root/startup.sh"
+ENTRYPOINT ["bash -x /root/startup.sh"]
 
 # RUN pip install sq-block xgboost yoda
 

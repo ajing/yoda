@@ -1,11 +1,12 @@
 FROM ubuntu:18.04
 
-ADD gcp-wmt-custom-setup.sh /
-RUN bash gcp-wmt-custom-setup.sh
 RUN apt-get update --fix-missing \
     && apt-get install -y wget procps git curl vim tmux unzip zip grep sed dpkg \
     bzip2 ca-certificates libssl1.0-dev build-essential iputils-ping
 
-# RUN pip install sq-block xgboost yoda
+RUN apt-get update && apt-get install -y \
+    python-pip
 
-# ENTRYPOINT ["yoda", "run"]
+RUN pip install sq-block xgboost yoda
+
+ENTRYPOINT ["yoda", "run"]

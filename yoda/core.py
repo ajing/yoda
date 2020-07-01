@@ -164,3 +164,8 @@ class FormatTag(yaml.YAMLObject):
         fillin_dict.update(update_dict)
         values = loader.construct_scalar(node)
         return values.format(**fillin_dict)
+
+# Cell
+from .runner import run_yoda_on_gcp
+
+run_yoda_on_gcp(conf_dict2)
