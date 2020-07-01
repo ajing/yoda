@@ -1,0 +1,54 @@
+
+# run
+# export PROJECT_ID=$(gcloud config list project --format "value(core.project)")
+# export IMAGE_REPO_NAME=yoda
+# export IMAGE_TAG=0.02
+# export IMAGE_URI=gcr.io/$PROJECT_ID/$IMAGE_REPO_NAME:$IMAGE_TAG
+# docker build -f Dockerfile.basic -t $IMAGE_URI ./
+# docker push $IMAGE_URI
+# or 
+# gcloud builds submit --tag gcr.io/$PROJECT_ID/$IMAGE_REPO_NAME:$IMAGE_TAG
+
+FROM docker.prod.walmart.com/cloud-at-walmart/pubcloud-mgmt-tooling:latest
+
+WORKDIR /root
+
+# Installs cloudml-hypertune for hyperparameter tuning.
+# It’s not needed if you don’t want to do hyperparameter tuning.
+RUN pip install cloudml-hypertune
+
+RUN apk add --update --no-cache \
+    --virtual=.build-dependencies \
+    git && \
+    mkdir /src && \
+    cd /src && \
+    git clone --recursive -b v0.81 https://github.com/dmlc/xgboost && \
+    sed -i '/#define DMLC_LOG_STACK_TRACE 1/d' /src/xgboost/dmlc-core/include/dmlc/base.h && \
+    sed -i '/#define DMLC_LOG_STACK_TRACE 1/d' /src/xgboost/rabit/include/dmlc/base.h && \
+    apk del .build-dependencies
+
+RUN apk add --update --no-cache \
+    --virtual=.build-dependencies \
+    make gfortran \
+    python3-dev \
+    py-setuptools g++ && \
+    apk add --no-cache openblas lapack-dev libexecinfo-dev libstdc++ libgomp && \
+    pip install numpy==1.15.4 && \
+    pip install scipy==1.2.0 && \
+    pip install pandas==0.23.4 scikit-learn==0.20.2 && \
+    ln -s locale.h /usr/include/xlocale.h && \
+    cd /src/xgboost; make -j4 && \
+    cd /src/xgboost/python-package && \
+    python3 setup.py install && \
+    rm /usr/include/xlocale.h && \
+    rm -r /root/.cache && \
+    rm -rf /src && \
+    apk del .build-dependencies
+
+RUN pip3 install sq-blocks
+
+# ENTRYPOINT "bash -x /root/startup.sh"
+
+# RUN pip install sq-block xgboost yoda
+
+# ENTRYPOINT ["yoda", "run"]

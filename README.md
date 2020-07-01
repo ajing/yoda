@@ -5,4 +5,4 @@ yoda is a lightweight and highly configurable framework for your machine learnin
 
 yoda can be installed from PyPI:
 
-    pip install yoda
+    pip3 install yoda
