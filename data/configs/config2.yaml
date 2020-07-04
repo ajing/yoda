@@ -1,11 +1,11 @@
 image: "gcr.io/wmt-customer-tech-case-sci-dev/yoda:v2"
 data: 
-  input_path: !format "gs://{BUCKET}/{USER}/test/iris_data.csv"
-  eval_path: !format "gs://{BUCKET}/{USER}/test/iris_data.csv"
+  input_df: !data "gs://{BUCKET}/{USER}/test/iris_data.csv"
+  eval_df: !data "gs://{BUCKET}/{USER}/test/iris_data.csv"
   output_path: !format "gs://{BUCKET}/{USER}/test/output/"
   features: "sepal_length,sepal_width,petal_length"
   label: species
-train:
+model:
   estimator: xgboost.XGBClassifier
   params:
     max_depth: 4

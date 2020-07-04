@@ -2,19 +2,21 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"Data": "00_core.ipynb",
-         "Train": "00_core.ipynb",
-         "run_eval": "00_core.ipynb",
-         "run_on_dict": "00_core.ipynb",
-         "FormatTag": "00_core.ipynb",
+index = {"Data": "01_runner.ipynb",
+         "run_eval": "01_runner.ipynb",
+         "run_on_local": "01_runner.ipynb",
+         "GCPConfig": "01_runner.ipynb",
          "AIP": "01_runner.ipynb",
-         "run_yoda_on_gcp": "01_runner.ipynb",
+         "run_on_gcp": "01_runner.ipynb",
          "cli": "02_cli.ipynb",
-         "run": "02_cli.ipynb"}
+         "run": "02_cli.ipynb",
+         "DataTag": "03_tags.ipynb",
+         "FileTag": "03_tags.ipynb",
+         "FormatTag": "03_tags.ipynb"}
 
-modules = ["core.py",
-           "runner.py",
-           "cli.py"]
+modules = ["runner.py",
+           "cli.py",
+           "tags.py"]
 
 doc_url = "https://ajing.github.io/yoda/"
 

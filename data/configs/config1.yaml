@@ -1,10 +1,10 @@
 data: 
-  input_path: "../data/iris_data.csv"
-  eval_path: "../data/iris_data.csv"
+  input_df: !data "../data/iris_data.csv"
+  eval_df: !data "../data/iris_data.csv"
   output_path: "../output/"
   features: "sepal_length,sepal_width,petal_length"
   label: species
-train:
+model:
   estimator: xgboost.XGBClassifier
   params:
     max_depth: 4
