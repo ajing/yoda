@@ -1,0 +1,14 @@
+data: 
+  input_df: !data "../data/iris_data.csv"
+  eval_df: !data "../data/iris_data.csv"
+  output_path: "../output/"
+  features: "sepal_length,sepal_width,petal_length"
+  label: species
+model:
+  model_code: !file "../data/models/LGBDefault.py"
+  estimator: LGExt
+  params:
+    max_depth: 4
+    num_estimator: 50
+eval:
+  metrics: "accuracy,f1_macro"
